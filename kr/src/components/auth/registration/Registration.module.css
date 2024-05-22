@@ -1,0 +1,229 @@
+.form{
+    background-color: white;
+    padding: 30px;
+    width: 27%;
+    /*margin-top: -10%;*/
+    border-radius: 30px;
+
+}
+.container_form{
+    padding-top: 30px;
+    padding-bottom: 50px;
+    min-height: 100vh;
+    background-color: whitesmoke;
+    align-items: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+.form h2{
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 500;
+    font-size: 30px;
+    color: #dda423;
+}
+.form input{
+    /*width: 98%;*/
+    /*height: 25px;*/
+    /*margin-top: 5px;*/
+    /*margin-bottom: 10px;*/
+    /*padding: 0;*/
+    width: 100%;
+    height: 40px;
+    border-radius: 0;
+    border-top-width: 0;
+    font-size: 20px;
+    font-family: sans-serif;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: solid;
+    color: black;
+    padding-left: 5px;
+    border-color: #FFC84D;
+
+}
+input::placeholder{
+    font-size: 15px;
+}
+.form>div{
+    margin-bottom: 20px;
+}
+.form>div>label{
+    color:  #777777;
+    margin-left: 5px;
+
+}
+.genderSelect{
+    text-align: center;
+
+    width: 20%;
+    height: 40px;
+    border-radius: 0;
+    border-top-width: 0;
+    font-size: 17px;
+    font-family: sans-serif;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 2px;
+    border-style: solid;
+    color: black;
+    padding-left: 5px;
+    border-color: #FFC84D;
+
+}
+
+.day_select{
+    text-align: center;
+    margin-top: 10px;
+
+    width: 20%;
+    height: 40px;
+    border-radius: 0;
+    border-top-width: 0;
+    font-size: 17px;
+    font-family: sans-serif;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 2px;
+    border-style: solid;
+    color: black;
+    padding-left: 5px;
+    border-color: #FFC84D;
+}
+.year_select{
+    text-align: center;
+
+    width: 30%;
+    height: 40px;
+    border-radius: 0;
+    border-top-width: 0;
+    font-size: 17px;
+    border-bottom-width: 2px;
+
+    font-family: sans-serif;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: solid;
+    color: black;
+    padding-left: 5px;
+    border-color: #FFC84D;
+}
+.month_select{
+    text-align: center;
+
+    width: 50%;
+    height: 40px;
+    border-radius: 0;
+    border-bottom-width: 2px;
+
+    border-top-width: 0;
+    font-size: 17px;
+    font-family: sans-serif;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: solid;
+    color: black;
+    padding-left: 5px;
+    border-color: #FFC84D;
+}
+
+.aboutMe{
+    width: 100%;
+    border-width: 0;
+    border-bottom-width: 2px;
+    font-size: 20px;
+    color: black;
+    border-color: #FFC84D;
+    border-radius: 0;
+    font-family: sans-serif;
+    resize: vertical;
+}
+.aboutMe::placeholder{
+    font-size: 15px;
+
+}
+
+.form button{
+    margin-top: 20px;
+    border-radius: 13px;
+    height: 50px;
+    background-color: #FFC84D;
+    border-width: 0;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.goToReg p {
+    display: flex;
+    justify-content: center;
+}
+.hrefToRegistr{
+    font-family: sans-serif;
+    text-decoration: none;
+    color: black;
+}
+
+.goToReg p span {
+    font-family: sans-serif;
+    color: #FFC84D;
+    text-decoration: none;
+}
+.div_error{
+    background-color: #ef4b4b;
+    display: inline-block;
+    padding: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    position: fixed;
+    top: 20px;
+    left: -30px;
+    border-radius: 5px;
+    animation: 0.4s normal 0s forwards 1 toright linear,
+    0.4s normal 2.35s forwards 1 toleft linear;
+
+}
+.div_error::after{
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 4px;
+    background-color: white;
+
+    left: 0;
+    bottom: 4px;
+    animation-duration: 1.7s;
+    animation-name: progresbar;
+    animation-delay: 0.6s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    z-index: 10;
+}
+.div_error p{
+    margin: 0;
+}
+@keyframes toright{
+    70%{
+        left: 20px;
+    }
+    to {
+        left: 10px;
+    }
+
+}
+@keyframes progresbar{
+
+    to {
+        width: 0;
+    }
+
+}
+@keyframes toleft{
+    30%{
+        left: 20px;
+    }
+    to {
+        left: -100%;
+    }
+
+}

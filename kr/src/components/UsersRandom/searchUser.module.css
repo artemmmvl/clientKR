@@ -1,0 +1,65 @@
+.container{
+    width: 56%;
+    min-height: calc(100vh - 150px);
+    background-color: #ececec;
+    padding-top: 100px;
+    padding-left: 22%;
+    padding-right: 22%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding-bottom: 70px;
+}
+.item{
+    display: flex;
+    background-color: white;
+    width: 100%;
+    border-radius: 30px;
+    justify-content: space-between;
+    overflow: hidden;
+}
+.div_img{
+    position: relative;
+    width: 63%;
+    border-right-style: solid;
+    border-right-color: #dadada;
+    border-right-width: 0.5px;
+}
+.div_img img{
+
+
+    width: 100%;
+}
+.info{
+    width: 34%;
+}
+.like_div{
+    width: 17%;
+    aspect-ratio: 1;
+    position: absolute;
+    bottom: 30px;
+    left: 25%;
+    opacity: 0.6;
+
+}
+.like_div:hover, .dislike_div:hover {
+
+    opacity: 0.9;
+
+}
+.dislike_div{
+    width: 17%;
+    aspect-ratio: 1;
+    position: absolute;
+    bottom: 30px;
+    right: 25%;
+    opacity: 0.6;
+}
+.dislike_div button,.like_div button{
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+
+}
