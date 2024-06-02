@@ -30,7 +30,6 @@ function LoginForm(props) {
             });
             console.log(responseAuth.data.token)
             dispatch(dispatches.setToken({token: responseAuth.data.token}))
-            props.setCheck(true)
 
 
             navigate('/')
@@ -68,12 +67,15 @@ function LoginForm(props) {
             <form className={classes.form} onSubmit={handleSubmit}>
                 <h2>Вход</h2>
                 <div>
-                    <Input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)}
+                    <Input
+                        labelName="Логин"
+                        type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)}
                            autoComplete="username"
                     ></Input>
                 </div>
                 <div>
                     <Input
+                        labelName="Пароль"
                         type="password"
                         id="password"
                         value={password}

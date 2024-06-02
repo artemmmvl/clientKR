@@ -172,7 +172,6 @@ function Registration(props) {
                 });
             console.log(responseAuth)
             dispatch(dispatches.setToken({token: responseAuth.data.token}))
-            props.setCheck(true)
             navigate('/')
 
 
@@ -302,7 +301,8 @@ function Registration(props) {
                     ></Input>
                 </div>
                 <div>
-                    <input required type="file" onChange={handleFileChange} accept=".png, .jpeg, .jpg" />
+                    <label >Фото: </label>
+                    <input style={{marginTop: 15 +'px'}} required type="file" onChange={handleFileChange} accept=".png, .jpeg, .jpg" />
                 </div>
 
                 <button>Зарегистрироваться</button>

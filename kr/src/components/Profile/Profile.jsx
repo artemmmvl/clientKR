@@ -5,8 +5,9 @@ import ProfileInfo from "./ProfileInfo";
 import ProfileSocNetLink from "./ProfileSocNetLink";
 import axios from "axios";
 
-import {useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {useNavigate, useParams} from "react-router-dom";
+import {dispatches} from "../../store/reducer";
 
 
 
@@ -17,7 +18,8 @@ import {useParams} from "react-router-dom";
      const token=useSelector(state => state.auth.token)
      const [data, setData]=useState(null)
      const [error, setError]=useState(null)
-
+     const navigate=useNavigate()
+     const role=useSelector(state => state.auth.role)
      useEffect(() => {
          const getData = async () => {
              try {
@@ -47,12 +49,37 @@ import {useParams} from "react-router-dom";
          }
             getData()
           // Вызываем функцию получения данных при монтировании компонента
-     }, [serverUrl, token]);
+     }, [serverUrl, token, id]);
 
     if(error!==null){
 
     }
     console.log(data)
+
+     const deleteProfile = async () => {
+         try {
+
+             const responseAuth = await axios.delete(serverUrl+'/users/'+id,
+                 {
+                     headers: {
+
+                         'Authorization': "Bearer "+token
+                     }
+                 });
+             console.log(responseAuth)
+             if(role!=="ROLE_ADMIN"&& id!=="me"){
+                 dispatches.deleteToken()
+             }
+             dispatches.deleteToken()
+             navigate('/profile/me')
+
+         }
+         catch (Error){
+             console.log(Error)
+         }
+
+     }
+
 
      return (
         <>
@@ -60,7 +87,7 @@ import {useParams} from "react-router-dom";
                 <div className={classes.container}>
                     {/* Здесь можно использовать данные из переменной data */}
                     <ProfilePicture img={data.img} name={data.firstname} city={data.city}/>
-                     <ProfileInfo data={data} change={id==='me'} />
+                     <ProfileInfo data={data} change={id==='me' || role==="ROLE_ADMIN" } userId={id} deleteProfile={deleteProfile}/>
                     <ProfileSocNetLink tg={data.tg} vk={data.vk}/>
                 </div>
             ) : (

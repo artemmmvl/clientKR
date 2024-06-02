@@ -8,7 +8,10 @@ import {NavLink, useNavigate} from "react-router-dom";
 
 
 function ProfileInfo(props) {
+
     const navigate=useNavigate()
+
+
     return(
         <div className={classes.container_profile_info}>
             <ItemInfoAboutProfile keyItem='Имя' value={props.data.firstname}></ItemInfoAboutProfile>
@@ -17,16 +20,22 @@ function ProfileInfo(props) {
             <ItemInfoAboutProfile keyItem='Дата рождения' value={new Date(props.data.birthday*1000).toLocaleDateString("ru-RU")}></ItemInfoAboutProfile>
             <ItemInfoAboutProfile keyItem='Почта' value={props.data.email}></ItemInfoAboutProfile>
             <ItemInfoAboutProfile keyItem='Обо мне' value={props.data.aboutMe}></ItemInfoAboutProfile>
+            {
+                props.change?(
+                <div className={classes.buttons}>
 
-            {props.change?(
-                <div className={classes.change_button} onClick={()=>navigate('/profile/change')}>
-                    <NavLink to='/profile/change'>Изменить</NavLink>
-                </div>):null
+
+
+                        <div className={classes.change_button} onClick={()=>navigate('/profile/change/'+props.userId)}>
+                            <NavLink to={'/profile/change/'+props.userId}>Изменить</NavLink>
+                        </div>
+
+                        <div className={classes.delete_button} onClick={()=>props.deleteProfile(props.userId)}>
+                            <p>Удалить</p>
+                        </div>
+                </div>
+                ):null
             }
-
-
-
-
         </div>
 
     )

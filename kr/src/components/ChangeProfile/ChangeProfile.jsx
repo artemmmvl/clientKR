@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import classes  from '../auth/registration/Registration.module.css'
-import {NavLink, useNavigate} from "react-router-dom";
+import {NavLink, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Input from "../auth/Input/Input";
 import Select from "../auth/Input/Select";
@@ -14,7 +14,14 @@ import {dispatches} from "../../store/reducer";
 
 
 export default function ChangeProfile(props) {
-    const [data, setData] = useState('');
+    const { id } = useParams();
+
+    const [data, setData] = useState(undefined);
+    const role=useSelector(state =>state.auth.role)
+    console.log(role)
+    const navigate=useNavigate()
+    console.log('id '+id)
+
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -32,18 +39,22 @@ export default function ChangeProfile(props) {
     console.log("name"+name)
     console.log("email"+username)
     console.log(data)
-
-
     const [error, setError] = useState(null);
+
     useEffect(() => {
         const getData = async () => {
-            try {
+                if(role!=="ROLE_ADMIN" && id!=="me"){
+                    console.log("AAA")
+                    navigate('/profile/me')
+                    return;
+                }
+
                 const config = {
                     headers: {
                         'Authorization': "Bearer "+token
                     }
                 };
-                axios.get(serverUrl+'/users/me', config)
+                axios.get(serverUrl+'/users/'+id, config)
                     .then(response => {
                         console.log('response')
                         console.log(response.data);
@@ -67,19 +78,19 @@ export default function ChangeProfile(props) {
 
                     })
                     .catch(error => {
-                        console.error(error);
-                        setError(error)
+                        console.log("Error 1")
+                        console.log(error)
+                        // console.error(error);
+                        // setError(error)
                         // Обработка ошибки
                     });
 
-            } catch (Error) {
-                console.log(Error)
 
-            }
         }
         getData()
         // Вызываем функцию получения данных при монтировании компонента
     }, [serverUrl, token]);
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
         setImg(file);
@@ -88,8 +99,8 @@ export default function ChangeProfile(props) {
 
 
 
-    const navigate=useNavigate()
-    const dispatch=useDispatch()
+
+
 
     let dateDay=[{valueHtml:-1,value:"День",
         disable:true}]
@@ -219,7 +230,7 @@ export default function ChangeProfile(props) {
             formData.append('birthday', Math.floor(new Date(year, month, day) / 1000));
             console.log(formData)
 
-            const responseAuth = await axios.patch(serverUrl+'/users', formData,
+            const responseAuth = await axios.patch(serverUrl+'/users/'+id, formData,
                 {
                     headers: {
                         'Content-Type': 'multipart/form-data',
@@ -229,7 +240,7 @@ export default function ChangeProfile(props) {
             console.log(responseAuth)
             // dispatch(dispatches.setToken({token: responseAuth.data.token}))
             // props.setCheck(true)
-            navigate('/profile')
+            navigate('/profile/'+id)
 
 
 
@@ -258,13 +269,14 @@ export default function ChangeProfile(props) {
     console.log(month)
     console.log(year)
     return (
+
         <>
             <div >
                 {error!==null?<div className={classes.div_error}>
                     <p className="error">{error}</p>
                 </div>:null}
             </div>
-            {data ? (
+            {data!==undefined ? (
             <div className={classes.container_form}>
                 <form className={classes.form} onSubmit={handleSubmit}>
                     <h2 >Изменение профиля</h2>
